@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piket Kelas XI F-3 - Tim 1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- HEADER KELAS & STATUS -->
+        <header class="header">
+            <div class="brand">
+                <h1>🧹 Piket Kelas XI F-3</h1>
+                <span id="syncBadge" class="badge-sync online">● Online</span>
+            </div>
+            <p class="user-id">Tim 1: Rama, Qarira, Dini, Almaira, Shafa</p>
+        </header>
+
+        <!-- FILTER TABS BERDASARKAN STATUS -->
+        <div class="filter-tabs">
+            <button class="tab-btn active" onclick="filterPiket('semua', event)">Semua Hari</button>
+            <button class="tab-btn" onclick="filterPiket('belum', event)">Belum Piket</button>
+            <button class="tab-btn" onclick="filterPiket('selesai', event)">Selesai</button>
+        </div>
+
+        <!-- DAFTAR JADWAL PIKET -->
+        <main id="taskList" class="task-list">
+            <!-- Kartu jadwal piket akan muncul secara dinamis di sini -->
+        </main>
+
+        <!-- TOMBOL TAMBAH JADWAL PIKET (+) -->
+        <button class="fab-add" onclick="openModalForm()">+</button>
+    </div>
+
+    <!-- MODAL FORM INPUT JADWAL PIKET -->
+    <div id="modalFormOverlay" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3>&lt; Tambah Jadwal Piket</h3>
+            <form id="taskForm" onsubmit="handleSimpanPiket(event)">
+                <div class="form-group">
+                    <label>Nama Petugas Piket:</label>
+                    <select id="namaSiswa" required>
+                        <option value="">-- Pilih Anggota Tim 1 --</option>
+                        <option value="Rama">Rama</option>
+                        <option value="Qarira">Qarira</option>
+                        <option value="Dini">Dini</option>
+                        <option value="Almaira">Almaira</option>
+                        <option value="Shafa">Shafa</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Hari Piket:</label>
+                    <select id="hariPiket" required>
+                        <option value="">-- Pilih Hari --</option>
+                        <option value="Senin">Senin</option>
+                        <option value="Selasa">Selasa</option>
+                        <option value="Rabu">Rabu</option>
+                        <option value="Kamis">Kamis</option>
+                        <option value="Jumat">Jumat</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Jenis Tugas Piket:</label>
+                    <select id="jenisTugas" required>
+                        <option value="">-- Pilih Tugas --</option>
+                        <option value="Menyapu & Mengepel Kelas">Menyapu & Mengepel Kelas</option>
+                        <option value="Membersihkan Papan Tulis">Membersihkan Papan Tulis</option>
+                        <option value="Membuang Sampah Kelas">Membuang Sampah Kelas</option>
+                        <option value="Merapikan Meja & Kursi">Merapikan Meja & Kursi</option>
+                        <option value="Membersihkan Kaca & Jendela">Membersihkan Kaca & Jendela</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal Pelaksanaan:</label>
+                    <input type="date" id="deadline" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Pengingat Waktu Piket (Jam):</label>
+                    <input type="time" id="reminder">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeModalForm()">Batal</button>
+                    <button type="submit" class="btn-submit">Simpan Jadwal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ERROR VALIDASI -->
+    <div id="modalErrorOverlay" class="modal-overlay warning-overlay hidden">
+        <div class="modal-card modal-warning">
+            <div class="warning-icon">!</div>
+            <h3>Tanggal Terlewat!</h3>
+            <p>Tanggal pelaksanaan piket tidak boleh kurang dari hari ini.</p>
+            <button class="btn-warning-ack" onclick="closeModalError()">Mengerti</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
